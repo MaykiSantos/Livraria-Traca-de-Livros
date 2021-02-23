@@ -10,7 +10,7 @@
 --corDestaque: #F58634;
 --corCardcarrinho: #EFE1D0;
 
---imagemFundo: url(./IMG/imagem_fundo.svg);
+--imagemFundo: url(../IMG/imagem_fundo.svg)
 
 /*var()*/
 /*****/
@@ -18,16 +18,16 @@
 
 @font-face{
     font-family: monogram;
-    src:url(./fonts/Monogram.otf);
+    src:url(../fonts/Monogram.otf);
 }
 @font-face{
     font-family: hugMe;
-    src: url(./fonts/Hug\ Me\ Tight\ -\ TTF.ttf);
+    src: url(../fonts/Hug\ Me\ Tight\ -\ TTF.ttf);
 }
 
 @font-face{
     font-family: Sunrise;
-    src: url(./fonts/Sunrise\ International\ Demo.otf);
+    src: url(../fonts/Sunrise\ International\ Demo.otf);
 }
 
 header{
@@ -105,7 +105,7 @@ nav .dropdown-menu{
     background-color: var(--corMenu);
     border: none;
     box-shadow: 3px 3px 5px gray;
-    
+
 }
 
 nav .dropdown-menu li{
@@ -123,13 +123,13 @@ nav .dropdown-menu li{
     color: black;
     font-size: 30px;
     padding-left: 1rem;
-    
+
 }
 
 .seta{
     position: absolute;
-    border-left: 20px solid transparent; 
-    border-right: 20px solid transparent; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
     border-bottom: 20px solid var(--corMenu);
     margin-top: -22px;
     margin-left: 15px;
@@ -263,7 +263,6 @@ nav .dropdown-menu li{
 }
 
 .item-filtro a{
-    bottom: none;
     text-decoration: none;
     color: black;
     display: flex;
@@ -371,7 +370,7 @@ nav .dropdown-menu li{
     border-color: black;
     border-width: 2px;
     padding-left: .5rem;
-    
+
 }
 
 .btn-junto a{
@@ -815,7 +814,7 @@ nav .dropdown-menu li{
 }
 
 #imagem{
-    background-image: url(./IMG/imagem.jpg);
+    background-image: url(../IMG/imagem.jpg);
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
@@ -1043,7 +1042,7 @@ footer #aviso{
     .lista-btn-informacoes a{
         margin-top: 20px;
     }
-    
+
     #apresentacao .livro-destaque{
         display: none;
     }
@@ -1164,7 +1163,7 @@ footer #aviso{
     #opcoes-menu-lateral{
         padding: 10px;
         margin: 0;
-        
+
     }
 
     #opcoes-menu-lateral li{
@@ -1278,9 +1277,9 @@ footer #aviso{
         writing-mode: vertical-rl;
         transition: all 0.3s;
     }
-    
+
     #definir-filtro{
-        
+
         margin: 0;
         padding: 1rem .2rem 1rem 0;
     }
@@ -1361,11 +1360,11 @@ footer #aviso{
     #registro-carrinho{
         padding: 0;
     }
-    
+
     #registro-carrinho li i{
         padding: 0 1rem 0 0;
     }
-    
+
     #apresentacao{
         background-blend-mode: soft-light;
     }
@@ -1382,7 +1381,7 @@ footer #aviso{
     .bloco-livro-direita{
         max-width: none;
     }
-    
+
     .bloco-livro-esquerda #consulta-cep .input-group{
         width: 90%;
     }
@@ -1423,13 +1422,13 @@ footer #aviso{
 
 
 
-        
+
 }
 
 /* X-Large devices (large desktops, 1200px and down) xl*/
 @media all and (max-width: 1200px) and (min-width: 992px) {
     .lista-livros .card-livro a div h3{
         font-size: 1.5rem !important;
-    } 
+    }
 
 }

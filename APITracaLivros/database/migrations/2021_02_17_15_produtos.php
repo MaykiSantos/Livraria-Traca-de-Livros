@@ -13,12 +13,12 @@ class Produtos extends Migration
             $table->id();
             $table->string('produto_titulo');
             $table->enum('produto_tipo', ['Livro', 'Papelaria']);
-            $table->float('produto_porcentagem_desconto', 3,2);
+            $table->integer('produto_porcentagem_desconto');
             $table->float('produto_valor', 6,2);
             $table->text('produto_descricao');
             $table->float('produto_largura', 3, 1);
             $table->float('produto_altura', 3, 1);
-            $table->float('produto_peso', 3, 1);
+            $table->float('produto_peso', 5, 1);
             $table->year('produto_ano');
             $table->boolean('disponibilidade')->default(false);
             $table->enum('produto_tipo_acabamento', ['Brochura', 'Capa dura', 'Flexível', 'Espiral'])->nullable();
@@ -26,7 +26,6 @@ class Produtos extends Migration
             $table->float('produto_profundidade', 3, 1)->nullable();
             $table->string('produto_autor', 100)->nullable();
             $table->string('produto_editora', 100)->nullable();
-            $table->foreignId('fk_imagens_id')->constrained('imagens');
             $table->foreignId('fk_categorias_livros_id')->nullable()->constrained('categorias_livros');
             $table->foreignId('fk_categorias_papelaria_id')->nullable()->constrained('categorias_papelaria');
             $table->foreignId('fk_fornecedores_id')->constrained('fornecedores');

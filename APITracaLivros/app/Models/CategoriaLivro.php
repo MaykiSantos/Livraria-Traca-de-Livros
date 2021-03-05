@@ -13,10 +13,20 @@ class CategoriaLivro extends Model
 
     protected $table = 'categorias_livros';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
+    protected $appends = ['links'];
     protected $fillable =['categoria_descricao'];
 
     public function produtos()
     {
         return $this->hasMany(Produto::class, 'fk_categorias_livros_id');
+    }
+
+    public function getLinksAttribute($links) : array
+    {
+
+        return([
+            'livros' => "/". env('PREFIX_API') ."/produtos-livro/cat$this->id"
+        ]);
     }
 }

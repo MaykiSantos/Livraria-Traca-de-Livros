@@ -13,6 +13,7 @@ class PedidosSeparacao extends Model
 
     protected $table = 'pedidos_separacao';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'fk_funcionarios_almoxarifado_id',
         'fk_pedidos_compras_id'

@@ -13,6 +13,7 @@ class PedidoCompra extends Model
 
     protected $table = 'pedidos_compras';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'pedido_data',
         'pedido_valor',

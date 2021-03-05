@@ -11,9 +11,8 @@ class Imagens extends Migration
     {
         Schema::create('imagens', function(Blueprint $table){
             $table->id();
-            $table->binary('imagem_1');
-            $table->binary('imagem_2')->nullable();
-            $table->binary('imagem_3')->nullable();
+            $table->binary('imagem');
+            $table->foreignId('fk_produtos_id')->constrained('produtos');
             $table->softDeletes();
         });
     }

@@ -13,6 +13,7 @@ class StatusPedido extends Model
 
     protected $table = 'status_pedidos';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =['descricao_status'];
 
 

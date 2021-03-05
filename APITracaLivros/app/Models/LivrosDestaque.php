@@ -13,6 +13,7 @@ class LivrosDestaque extends Model
 
     protected $table = 'livros_destaques';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'fk_produtos_id'
     ];

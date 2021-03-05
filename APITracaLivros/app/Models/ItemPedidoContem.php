@@ -13,6 +13,7 @@ class ItemPedidoContem extends Model
 
     protected $table = 'item_pedido_contem';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'item_pedido_valor',
         'item_pedido_quantidade',

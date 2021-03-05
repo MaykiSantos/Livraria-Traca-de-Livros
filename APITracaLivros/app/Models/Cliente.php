@@ -4,6 +4,7 @@
 namespace App\Models;
 
 
+use App\Http\Help\ConverteData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,6 +14,8 @@ class Cliente extends Model
 
     protected $table = 'clientes';
     public $timestamps = false;
+    protected $appends= ['links'];
+    protected $hidden = ['deleted_at', 'cliente_senha'];
     protected $fillable =[
         'cliente_cpf',
         'cliente_nome',
@@ -35,5 +38,20 @@ class Cliente extends Model
     public function pedidosCompra()
     {
         return $this->hasMany(PedidoCompra::class, 'fk_clientes_id');
+    }
+
+    public function getClienteDataNascimentoAttribute(string $data)
+    {
+        return ConverteData::formataData($data);
+    }
+
+    public function getLinksAttribute($links)
+    {
+        return ([
+            'cliente' => "/". env('PREFIX_API') . "/clientes/$this->cliente_cpf",
+            'chamados' => "/". env('PREFIX_API') . "/chamados/clientes/$this->cliente_cpf",
+            'enderecos' => "/". env('PREFIX_API') . "/enderecos/clientes/$this->cliente_cpf",
+            'pedidos' => "/". env('PREFIX_API') . "/pedidos/clientes/$this->cliente_cpf"
+        ]);
     }
 }

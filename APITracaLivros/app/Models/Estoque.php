@@ -13,6 +13,7 @@ class Estoque extends Model
 
     protected $table = 'estoques';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'estoque_quantidade',
         'estoque_quantidade-minima',

@@ -13,6 +13,8 @@ class Chamado extends Model
 
     protected $table = 'chamados';
     public $timestamps = false;
+    protected $appends= ['links'];
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'chamado_titulo',
         'chamado_descricao',
@@ -22,6 +24,13 @@ class Chamado extends Model
     public function cliente()
     {
         return $this->belongsTo(Cliente::class, 'fk_clientes_id');
+    }
+
+    public function getLinksAttribute()
+    {
+        return ([
+            'cliente' => "/" . env('PREFIX_API') . "/clientes/{$this->cliente_cpf}"
+        ]);
     }
 
 }

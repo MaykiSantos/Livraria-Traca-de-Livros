@@ -13,6 +13,7 @@ class Endereco extends Model
 
     protected $table = 'enderecos';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'cep',
         'cidade',

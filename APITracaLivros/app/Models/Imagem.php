@@ -13,10 +13,15 @@ class Imagem extends Model
 
     protected $table = 'imagens';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
-        'imagem_1',
-        'imagem_2',
-        'imagem_3'
+        'imagem',
+        'fk_produtos_id'
     ];
+
+    public function getImagemAttribute($imagem)
+    {
+        return ($imagem);
+    }
 
 }

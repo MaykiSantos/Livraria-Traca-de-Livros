@@ -32,4 +32,9 @@ class Fornecedor extends Model
         return $this->hasMany(PedidoFornecedor::class, 'fk_fornecedores_id');
     }
 
+    public function produtos()
+    {
+        return $this->hasMany(Produto::class, 'fk_fornecedores_id');
+    }
+
 }

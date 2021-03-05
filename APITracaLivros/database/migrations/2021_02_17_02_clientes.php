@@ -13,8 +13,8 @@ class Clientes extends Migration
            $table->id();
            $table->string('cliente_cpf', 12)->unique();
            $table->string('cliente_nome', 50);
-           $table->string('cliente_telefone_01', 12);
-           $table->string('cliente_telefone_02', 12)->nullable();
+           $table->string('cliente_telefone_01', 15);
+           $table->string('cliente_telefone_02', 15)->nullable();
            $table->date('cliente_data_nascimento');
            $table->string('cliente_email', 60)->unique();
            $table->string('cliente_senha');

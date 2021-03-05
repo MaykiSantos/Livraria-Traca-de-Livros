@@ -13,7 +13,7 @@ class FuncionarioAlmoxarifado extends Model
 
     protected $table = 'funcionarios_almoxarifado';
     public $timestamps = false;
-    protected $hidden = ['funcionario_senha'];
+    protected $hidden = ['funcionario_senha', 'deleted_at'];
     protected $fillable =[
         'funcionario_cpf',
         'funcionario_nome',

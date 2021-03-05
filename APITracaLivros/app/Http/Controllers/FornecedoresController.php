@@ -22,29 +22,37 @@ class FornecedoresController extends Controller
         $fornecedor = Fornecedor::query()->where('fornecedor_CNPJ', '=', "$cnpj")->get();
 
         if(sizeof($fornecedor) == null){
-            return response()->json('Recurso não encontrado', 404);
+            return Erros::naoEncontado();
         }
         return response()->json($fornecedor);
     }
 
     public function store(Request $request){
 
+        $this->validate($request, [
+            'CNPJ'=> 'unique:App\Models\Fornecedor,fornecedor_CNPJ',
+            'email' => 'unique:App\Models\Fornecedor,fornecedor_email'
+        ], Erros::mensagens());
         $this->validaFornecedor($request);
 
-        DB::beginTransaction();
-        $fornecedor = Fornecedor::create([
-            'fornecedor_CNPJ' => "$request->CNPJ",
-            'fornecedor_nome' => "$request->nome",
-            'fornecedor_email' => "$request->email",
-            'fornecedor_telefone_1' => "$request->telefone_1",
-            'fornecedor_telefone_2' => "$request->telefone_2",
-            'fornecedor_cep' => "$request->cep",
-            'fornecedor_cidade' => "$request->cidade",
-            'fornecedor_bairro' => "$request->bairro",
-            'fornecedor_rua' => "$request->rua",
-            'fornecedor_numero' => "$request->numero"
-        ]);
-        DB::commit();
+        try{
+            DB::beginTransaction();
+            $fornecedor = Fornecedor::create([
+                'fornecedor_CNPJ' => "$request->CNPJ",
+                'fornecedor_nome' => "$request->nome",
+                'fornecedor_email' => "$request->email",
+                'fornecedor_telefone_1' => "$request->telefone_1",
+                'fornecedor_telefone_2' => "$request->telefone_2",
+                'fornecedor_cep' => "$request->cep",
+                'fornecedor_cidade' => "$request->cidade",
+                'fornecedor_bairro' => "$request->bairro",
+                'fornecedor_rua' => "$request->rua",
+                'fornecedor_numero' => "$request->numero"
+            ]);
+            DB::commit();
+        }catch (\Exception $e){
+            return Erros::erroBanco($e);
+        }
 
         return response()->json($fornecedor, 200);
     }
@@ -53,24 +61,28 @@ class FornecedoresController extends Controller
     {
         $this->validaFornecedor($request);
 
-        DB::beginTransaction();
-        $fornecedorEditado = Fornecedor::query()->where('fornecedor_CNPJ', '=', "$cnpj")->update([
-            'fornecedor_CNPJ' => "$request->CNPJ",
-            'fornecedor_nome' => "$request->nome",
-            'fornecedor_email' => "$request->email",
-            'fornecedor_telefone_1' => "$request->telefone_1",
-            'fornecedor_telefone_2' => "$request->telefone_2",
-            'fornecedor_cep' => "$request->cep",
-            'fornecedor_cidade' => "$request->cidade",
-            'fornecedor_bairro' => "$request->bairro",
-            'fornecedor_rua' => "$request->rua",
-            'fornecedor_numero' => "$request->numero"
-        ]);
-        DB::commit();
+        try {
+            DB::beginTransaction();
+            $fornecedorEditado = Fornecedor::query()->where('fornecedor_CNPJ', '=', "$cnpj")->update([
+                'fornecedor_CNPJ' => "$request->CNPJ",
+                'fornecedor_nome' => "$request->nome",
+                'fornecedor_email' => "$request->email",
+                'fornecedor_telefone_1' => "$request->telefone_1",
+                'fornecedor_telefone_2' => "$request->telefone_2",
+                'fornecedor_cep' => "$request->cep",
+                'fornecedor_cidade' => "$request->cidade",
+                'fornecedor_bairro' => "$request->bairro",
+                'fornecedor_rua' => "$request->rua",
+                'fornecedor_numero' => "$request->numero"
+            ]);
+            DB::commit();
+        }catch (\Exception $e){
+            return Erros::erroBanco($e);
+        }
 
         if ($fornecedorEditado == false)
         {
-            return response()->json('Solicitacao invalida', 404);
+            return Erros::naoEncontado();
         }
 
         return response()->json(boolval($fornecedorEditado)); // retorna true se a alteração for realizada
@@ -78,25 +90,31 @@ class FornecedoresController extends Controller
 
     public function destroy(string $cnpj)
     {
-        $fornecedorApagar = Fornecedor::query()->where('fornecedor_CNPJ', '=', "$cnpj")->first();
 
-        if($fornecedorApagar == false)
-        {
-            return response()->json('fornecedor nao encontado', 404);
+        try {
+            $fornecedorApagar = Fornecedor::query()->where('fornecedor_CNPJ', '=', "$cnpj")->first();
+            if($fornecedorApagar == false)
+            {
+                return Erros::naoEncontado();
+            }
+            $fornecedorApagar->delete();
+        }catch (\Exception $e){
+            return Erros::erroBanco($e);
         }
-        return response()->json($fornecedorApagar->delete()); // retorna true se a alteração for realizada
+
+        return response()->json(boolval($fornecedorApagar)); // retorna true se a alteração for realizada
     }
 
 
     private function validaFornecedor(Request $request)
     {
         $this->validate($request, [
-            'CNPJ'=> 'required|alpha_num|size:14',
+            'CNPJ'=> 'required|regex:/\d{14}/|size:14',
             'nome' => 'required',
             'email' => 'required|email:rfc',
-            'telefone_1' => 'required|alpha_num',
-            'telefone_2' => 'alpha_num|nullable',
-            'cep' => 'required|alpha_num|size:8',
+            'telefone_1' => 'required|integer',
+            'telefone_2' => 'nullable',
+            'cep' => 'required|regex:/\d{8}/|size:8',
             'cidade' => 'required',
             'bairro' => 'required',
             'rua' => 'required',

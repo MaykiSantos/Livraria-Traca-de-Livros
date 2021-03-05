@@ -17,8 +17,10 @@ class DatabaseSeeder extends Seeder
             categoriasSeeder::class,
             fornecedorSeeder::class,
             funcionariosSeeder::class,
-            imagensSeeder::class,
-            produtosSeeder::class
+            produtosSeeder::class,
+            ClientesSeeder::class,
+            ChamadosSeeder::class
+            //imagensSeeder::class
         ]);
     }
 }

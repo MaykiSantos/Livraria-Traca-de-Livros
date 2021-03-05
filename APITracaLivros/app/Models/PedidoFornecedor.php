@@ -13,6 +13,7 @@ class PedidoFornecedor extends Model
 
     protected $table = 'pedidos_fornecedores';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'pedidos_fornecedor_descricao',
         'pedidos_fornecedor_data',
@@ -24,7 +25,7 @@ class PedidoFornecedor extends Model
 
     public function funcionarioAdministrativo()
     {
-        return $this->belongsTo(FuncionarioAdministrativo::class, 'fk_funcionarios_administrativo_id');
+        return $this->belongsTo(FuncionarioAlmoxarifado::class, 'fk_funcionarios_administrativo_id');
     }
 
     public function fornecedor()

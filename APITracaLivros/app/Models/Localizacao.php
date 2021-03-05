@@ -13,6 +13,7 @@ class Localizacao extends Model
 
     protected $table = 'localizacao';
     public $timestamps = false;
+    protected $hidden = ['deleted_at'];
     protected $fillable =[
         'localizacao_corredor',
         'localizacao_estante',
